@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Submitted Data</title>
+  <link rel="stylesheet" href="style.css"> <!-- Your CSS -->
+</head>
+<body>
+  <h2>Submitted Data</h2>
+  <table id="data-table" border="1">
+    <thead>
+      <tr>
+        <th>Full Name</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>Subject</th>
+        <th>Message</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    fetch('https://script.google.com/macros/s/AKfycbyiCNSCJKQAcNQzD2mwxEsgh02jIA0MllkpqnWIrUVGsvE8n2s6KTBxbV8Ow6WYSIhPeg/exec') // Replace with your correct Apps Script URL
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);  // Debug: Check if data is fetched correctly
+
+        const tableBody = document.getElementById('data-table').getElementsByTagName('tbody')[0];
+        data.forEach(row => {
+          const newRow = tableBody.insertRow();
+          newRow.insertCell().textContent = row.full_name;
+          newRow.insertCell().textContent = row.email;
+          newRow.insertCell().textContent = row.phone_number;
+          newRow.insertCell().textContent = row.subject;
+          newRow.insertCell().textContent = row.message;
+        });
+      })
+      .catch(error => console.error('Error!', error));
+  </script>
+</body>
+</html>
